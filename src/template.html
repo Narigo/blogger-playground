@@ -4,15 +4,19 @@
       xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data'
       xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head lang="en">
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
   <title>{{> title }}</title>
   {{> styles }}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   {{> scripts }}
 </head>
 <body>
 <h1>test!</h1>
+<b:section id="header">
+
+</b:section>
 <footer>
-  <span class="campudus-random"></span>
+  <div id="campudus-random-click">Some random text from <span id="campudus-random">some stranger</span>.</div>
 </footer>
 </body>
 </html>

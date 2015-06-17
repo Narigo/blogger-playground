@@ -7,6 +7,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var handlebars = require('gulp-hb');
 var del = require('del');
+var he = require('he');
 var gulpSequence = require('gulp-sequence');
 var replace = require('gulp-replace');
 var minifyCss = require('gulp-minify-css');
@@ -95,7 +96,7 @@ function scriptsInliner() {
   function mappedScripts(match, jsFile) {
     var script = scripts[jsFile];
     if (script) {
-      return '<script>' + script + '</script>';
+      return '<script>' + he.encode(script) + '</script>';
     } else {
       return match;
     }
