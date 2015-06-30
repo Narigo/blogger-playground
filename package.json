@@ -6,6 +6,11 @@
   "scripts": {
     "test": "gulp test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Narigo/blogger-playground.git"
+  },
+  "license": "ISC",
   "devDependencies": {
     "browserify": "^10.2.4",
     "cheerio": "^0.19.0",
