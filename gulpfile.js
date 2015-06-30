@@ -11,6 +11,7 @@ var he = require('he');
 var gulpSequence = require('gulp-sequence');
 var replace = require('gulp-replace');
 var minifyCss = require('gulp-minify-css');
+var phantom = require('phantom');
 
 gulp.task('clean', cleaner);
 gulp.task('scss', sassCompiler);
@@ -19,16 +20,17 @@ gulp.task('template', handlebarsCompiler);
 gulp.task('inline:styles', stylesInliner);
 gulp.task('inline:scripts', scriptsInliner);
 gulp.task('test', tester);
-gulp.task('deploy', deployer);
+gulp.task('deploy:blogger', deployToBlogger);
 gulp.task('default', function (cb) {
   gulpSequence('clean', ['scss', 'scripts', 'template'], 'inline:styles', 'inline:scripts', cb);
 });
 gulp.task('deploy', function (cb) {
-  gulpSequence('default', 'test', 'deploy', cb);
+  gulpSequence('default', 'test', 'deployToBlogger', cb);
 });
 
 var styles = {};
 var scripts = {};
+var bloggerUrl = 'http://www.google.com';
 
 function scriptCompiler() {
   return browserify('./src/js/main.js')
@@ -108,9 +110,26 @@ function tester(cb) {
 }
 
 function deployer(cb) {
-  cb(new Error('help2!'));
+  deployToBlogger(cb);
 }
 
 function cleaner(cb) {
   del('out', cb);
+}
+
+function deployToBlogger(cb) {
+  phantom.create(function (ph) {
+    ph.createPage(function (page) {
+      page.open(bloggerUrl, function (status) {
+        console.log("opened blogger? ", status);
+        page.evaluate(function () {
+          return document.title;
+        }, function (result) {
+          console.log('Page title is ' + result);
+          ph.exit();
+          cb();
+        });
+      });
+    });
+  });
 }
