@@ -4,6 +4,7 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
+    "build": "gulp",
     "test": "gulp test"
   },
   "repository": {
