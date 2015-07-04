@@ -25,7 +25,7 @@ gulp.task('default', function (cb) {
   gulpSequence('clean', ['scss', 'scripts', 'template'], 'inline:styles', 'inline:scripts', cb);
 });
 gulp.task('deploy', function (cb) {
-  gulpSequence('default', 'test', 'deployToBlogger', cb);
+  gulpSequence('default', 'test', 'deploy:blogger', cb);
 });
 
 var styles = {};
