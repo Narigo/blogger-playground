@@ -30,7 +30,7 @@ gulp.task('deploy', function (cb) {
 
 var styles = {};
 var scripts = {};
-var bloggerUrl = 'http://www.google.com';
+var bloggerUrl = 'https://www.blogger.com';
 
 function scriptCompiler() {
   return browserify('./src/js/main.js')
